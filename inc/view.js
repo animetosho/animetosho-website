@@ -1,0 +1,16 @@
+AJS.x.replyComment=0,AJS.x.replyCommentDisp=0,AJS.x.replyToComment=function(e,t,n){if(n||(n=e),this.replyCommentDisp!=e){$id("comment_reply_placeholder_"+e).appendChild($id("comment_reply_form"))
+var i=$("#comment_reply_placeholder_"+e)
+i.css({display:"none"}).slideDown("fast",1==t?null:function(){try{$id("newcomment_message").focus()}catch(e){}}),e&&($id("comment_controls_"+e).style.display="none"),$id("comment_reply_placeholder_"+this.replyCommentDisp).style.display="none",this.replyCommentDisp&&($id("comment_controls_"+this.replyCommentDisp).style.display=""),this.replyCommentDisp=e,this.replyComment=n,$id("newcomment_reset").value=e?"Cancel":"Reset"}}.bind(AJS.x),AJS.x.submitComment=function(e){var t=$(e).serializeArray()
+return t.push({name:"replyto",value:AJS.x.replyComment}),AJS.AJAX.post(e.action,t,function(t){var n=AJS.x.replyComment
+e.reset(),$id("view_comments_count").innerHTML=parseInt($id("view_comments_count").innerHTML.replace(/,/g,""))+1,t=t.replace(/[\r\n\t]/g,"")
+var i=document.createElement("div")
+i.innerHTML=AJS.fmtAJAX4HTML(t),$(i).appendTo("#newcomments_placeholder_"+n),$(i).slideDown("slow"),AJS.evalScripts(t),$id("newcomment_captcha")&&($id("comment_reply_form").style.display="none",$("div.comment_buttons").css("display","none"))
+var o=t.match(/<a id="([a-z0-9]+)">/i)
+o[1]&&(window.location="#"+o[1])}),!1},AJS.x.editCid=0,AJS.x.editCache="",AJS.x.editComment=function(e){this.editCid&&this.cancelEditComment(),this.editCid=e,this.editCache=$id("comment_message_"+e).innerHTML
+var t=window.location.href;(p=t.indexOf("#"))>0&&(t=t.substr(0,p))
+var n=[{name:"cid",value:e},{name:"gettext",value:1},{name:"do",value:"editcomment"}]
+AJS.AJAX.post(t,n,function(t){$id("comment_message_"+e).innerHTML=AJS.fmtAJAX4HTML(t),$id("comment_controls_"+e).style.display="none",AJS.evalScripts(t)
+try{$id("editcomment_message").focus()}catch(n){}})}.bind(AJS.x),AJS.x.submitEditComment=function(e,t){return AJS.AJAX.post(e.action,$(e).serializeArray(),function(e){(eb=e.match(/^<modtitle>(.*?)<\/modtitle>/i))&&($id("comment_mod_"+t).innerHTML=eb[1],e=e.substr(eb[0].length)),$id("comment_message_"+t).innerHTML=AJS.fmtAJAX4HTML(e),$id("comment_controls_"+t).style.display="",AJS.x.editCid=0}),!1}.bind(AJS.x),AJS.x.cancelEditComment=function(){$id("comment_message_"+this.editCid).innerHTML=this.editCache,$id("comment_controls_"+this.editCid).style.display="",this.editCid=0}.bind(AJS.x),AJS.x.voteUpComment=function(e){var t=0|$id("comment_rating_"+e).getAttribute("vote_state")
+return this._voteComment(e,t>0?0:1)}.bind(AJS.x),AJS.x.voteDownComment=function(e){var t=0|$id("comment_rating_"+e).getAttribute("vote_state")
+return this._voteComment(e,0>t?0:-1)}.bind(AJS.x),AJS.x._voteComment=function(e,t){var n=window.location.href
+return(p=n.indexOf("#"))>0&&(n=n.substr(0,p)),AJS.AJAX.post(n,[{name:"do",value:"commentvote"},{name:"cid",value:e},{name:"vote",value:t}],function(n){return"ok"!=n?void alert("An unknown error occurred when submitting your rating."):($("#comment_voteup_"+e+", #comment_votedown_"+e).removeClass("voted"),t>0?$("#comment_voteup_"+e).addClass("voted"):0>t&&$("#comment_votedown_"+e).addClass("voted"),void $id("comment_rating_"+e).setAttribute("vote_state",t))}),!1}.bind(AJS.x)

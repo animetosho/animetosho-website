@@ -1,0 +1,98 @@
+
+html			{ background: [HTMLBG]; }
+body			{ background: [BODYBG]; color: [BODYFG]; }
+#topbar_c		{ background: [SIDEBG] url([SIDEIMG]) [SIDEIMGPROPS]; background-image: image-set(url([SIDEIMG] 1x); background-image: -webkit-image-set(url([SIDEIMG] 1x); }
+#mtopbar_c		{ background: [SIDEBG]; }
+#topbar_title a	{ color: [MAIN_TITLE]; }
+#topbar_betanote	{ color: [BETANOTE]; }
+#topbar_time a.feedbacklink	{ color: [FEEDBACKLINK]; }
+#mtopbar #topbar_nav_links a	{ border-color: [LINKBUTTON_BORD]; }
+#mtopbar #topbar_nav_links a:hover	{ border-color: [LINKBUTTON_HOV_FG]; background: [LINKBUTTON_HOV_BG]; }
+#userbar		{ background: url("data:image/png;base64,[USERBAR_BG_PNG]"); }
+#footer_line	{ border-top-color: [FOOTERLINE]; color: [FOOTERLINE]; }
+.usernotice_success		{ background-color: [USERNOTE_SUCCESS_BG]; color: [USERNOTE_SUCCESS_FG]; border: 1px solid [USERNOTE_SUCCESS_FG]; }
+.usernotice_alert		{ background-color: [USERNOTE_ALERT_BG]; color: [USERNOTE_ALERT_FG]; border: 1px solid [USERNOTE_ALERT_FG]; }
+.usernotice_error		{ background-color: [USERNOTE_ERROR_BG]; color: [USERNOTE_ERROR_FG]; border: 1px solid [USERNOTE_ERROR_FG]; }
+
+.user_quote	{ border-left-color: [COMMENT_BORD]; }
+.tipnote	{ color: [TIPNOTE]; }
+.tipnote:hover	{ border-bottom-color: [TIPNOTE_UL]; }
+input.text_error, textarea.text_error	{ border: 1px solid [INPUT_ERROR_BORD]; color: [INPUT_ERROR_FG]; background: [INPUT_ERROR_BG]; }
+input.text_error:hover, textarea.text_error:hover	{ background: [INPUT_ERROR_HOV_BG]; border: 1px solid [INPUT_ERROR_HOV_BORD]; }
+input.text_error:focus, textarea.text_error:focus	{ background: [INPUT_ERROR_FOC_BG]; border: 1px solid [INPUT_ERROR_FOC_BORD]; }
+input.text, select, textarea					{ border: 1px solid [INPUT_BORD]; background: [INPUT_BG]; color: [INPUT_FG]; }
+.uploadfield					{ border: 1px solid [INPUT_BORD]; background: [INPUT_BG]; color: [INPUT_FG]; }
+input.text:hover, select:hover, textarea:hover	{ border: 1px solid [INPUT_HOV_BORD]; background: [INPUT_HOV_BG]; }
+input.text:focus, select:focus, textarea:focus	{ border: 1px solid [INPUT_FOC_BORD]; background: [INPUT_FOC_BG]; }
+input.file_error		{ color: [INPUT_ERROR_FG]; }
+
+
+.errortext		{ color: [INPUT_ERROR_COMMENT]; }
+.required_field		{ color: [REQUIRED_FIELD]; }
+.form_errors		{ background: [FORM_ERRORS_BG]; color: [FORM_ERRORS_FG]; border: [FORM_ERRORS_BORD] 1px solid; }
+
+/** view **/
+.comment				{ background-color: [COMMENT_BG]; border-color: [COMMENT_BORD]; }
+.comment2				{ background-color: [COMMENT2_BG]; border-color: [COMMENT_BORD]; }
+.comment_buttons a, .comment_voting a		{ border-color: [LINKBUTTON_BORD]; }
+.comment_buttons a:hover, .comment_voting a:hover	{ border-color: [LINKBUTTON_HOV_FG] !important; background: [LINKBUTTON_HOV_BG]; }
+.comment_voting a.voted	{ border-color: [LINKBUTTON_HOV_FG] !important; background: [LINKBUTTON_HOV_BG]; }
+.newcomment_placeholder	{ background: [COMMENT_PH_BG]; border-color: [GENERIC_BORDER]; }
+.comment_oblivioned		{ color: [COMMENT_OBLIVIONED]; }
+
+h1,h2		{ color: [H2]; }
+a			{ color: [LINK]; }
+a:hover		{ color: [LINK_HOV]; }
+a:active, a:focus		{ color: [LINK_FOC]; }
+a:visited		{ color: [LINK_OLD]; }
+
+.pagination a, .pagination .multipage_current, a.pagination	{ border-color: [LINKBUTTON_BORD]; }
+.pagination .multipage_current	{ border-color: [LINKBUTTON_HOV_FG] !important; background: [LINKBUTTON_HOV_BG]; }
+.pagination a:hover, a.pagination:hover	{ border-color: [LINKBUTTON_HOV_FG] !important; background: [LINKBUTTON_HOV_BG]; }
+
+.deadlink, .deadlink:visited	{ color: [DLLINK_DEAD] !important; }
+.inactivelink	{ color: [DLLINK_INACTIVE] !important; }
+
+fieldset		{ border-color: [GENERIC_BORDER]; }
+th			{ background: [THEAD_BG]; color: [THEAD_FG]; }
+#ajax_shade	{ background: [AJAX_SHADE_BG]; color: [AJAX_SHADE_FG]; }
+
+.home_list_filter {
+	border-color: [THEAD_BG];
+}
+
+.home_list_datesep {
+	background: [THEAD_BG];
+	color: [THEAD_FG];
+}
+.home_list_entry, .view_list_entry {
+	background-color: [LISTITEM_BG];
+}
+.home_list_entry_alt, .view_list_entry_alt {
+	background-color: [LISTITEM2_BG];
+}
+.home_list_entry_compl_0 {
+	background-color: [LISTITEM_PROC_BG];
+}
+.home_list_entry_alt .home_list_entry_compl_0 {
+	background-color: [LISTITEM2_PROC_BG];
+}
+.home_list_entry_compl_-1 .link a, .tor_list_entry_compl_-1 {
+	color: [ITEM_SKIPPED_FG];
+}
+.home_list_entry_compl_-2 .link a, .tor_list_entry_compl_-2 {
+	color: [LISTITEM_BAD_FG];
+}
+.home_list_entry .links a, .view_list_entry .links a {
+	color: [DLLINK];
+}
+.home_list_entry .links a:hover, .view_list_entry .links a:hover {
+	color: [DLLINK_HOV];
+}
+.home_list_entry .links a:visited, .view_list_entry .links a:visited {
+	color: [DLLINK_OLD];
+}
+
+.dlxlink:hover	{ background: [DLLINK_MENU_BG]; border-color: [DLLINK_MENU_BORD]; }
+.dlxlink .linkmenu { background: [DLLINK_MENU_BG]; border-color: [DLLINK_MENU_BORD]; }
+.dlxlink .downarrow	{ color: [DLLINK_MENU_ARROW]; }

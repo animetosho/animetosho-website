@@ -1,0 +1,34 @@
+AJS.x.md5 = function(s,rounds,salt) {
+	rounds = rounds || 1;
+	salt = salt || "";
+	while(rounds--)
+		s = MD5(s+salt);
+	return s;
+};
+
+AJS.x.refreshCaptcha = function(fn)
+{
+	$id(fn+'_captcha_refresh').disabled=true;
+	AJS.AJAX.post(incUrl+'captcha.php?action=refresh', {h: $id(fn+'_captcha_hash').value, usedata: 1}, function(r) {
+		$id(fn+'_captcha_hash').value = r.substr(0,32);
+		$id(fn+'_captcha').md5key = r.substr(32,32);
+		$id(fn+'_captcha').md5salt = r.substr(64,32);
+		var ci = $id(fn+'_captcha_image');
+		if(r.length > 64) {
+			try {
+				ci.src = 'data:'+r.substr(96);
+			} catch(x) {
+				// data URI doesn't work?
+				ci.src = incUrl+'captcha.php?h='+r.substr(0,32);
+			}
+		}
+		else
+			ci.src = incUrl+'captcha.php?h='+r.substr(0,32);
+		$id(fn+'_captcha').value="";
+		$id(fn+'_captcha_refresh').disabled=false;
+	});
+};
+
+
+// This is a packed version of the Webtoolkit Javascript MD5 script.  You can find the original code here: http://www.webtoolkit.info/javascript-md5.html
+var MD5=function(a){function g(b,c){var d,e,a,f,g;a=b&2147483648;f=c&2147483648;d=b&1073741824;e=c&1073741824;g=(b&1073741823)+(c&1073741823);if(d&e)return g^2147483648^a^f;return d|e?g&1073741824?g^3221225472^a^f:g^1073741824^a^f:g^a^f}function h(a,b,c,d,e,f,h){a=g(a,g(g(b&c|~b&d,e),h));return g(a<<f|a>>>32-f,b)}function i(a,b,c,d,e,f,h){a=g(a,g(g(b&d|c&~d,e),h));return g(a<<f|a>>>32-f,b)}function j(a,b,d,c,e,f,h){a=g(a,g(g(b^d^c,e),h));return g(a<<f|a>>>32-f,b)}function k(a,b,d,c,e,f,h){a=g(a,g(g(d^ (b|~c),e),h));return g(a<<f|a>>>32-f,b)}function l(a){var b="",d="",c;for(c=0;c<=3;c++)d=a>>>c*8&255,d="0"+d.toString(16),b+=d.substr(d.length-2,2);return b}var f=[],m,n,o,p,b,c,d,e,a=function(a){for(var a=a.replace(/\r\n/g,"\n"),b="",d=0;d<a.length;d++){var c=a.charCodeAt(d);c<128?b+=String.fromCharCode(c):(c>127&&c<2048?b+=String.fromCharCode(c>>6|192):(b+=String.fromCharCode(c>>12|224),b+=String.fromCharCode(c>>6&63|128)),b+=String.fromCharCode(c&63|128))}return b}(a),f=function(a){var b,c=a.length; b=c+8;for(var d=((b-b%64)/64+1)*16,e=Array(d-1),f=0,g=0;g<c;)b=(g-g%4)/4,f=g%4*8,e[b]|=a.charCodeAt(g)<<f,g++;e[(g-g%4)/4]|=128<<g%4*8;e[d-2]=c<<3;e[d-1]=c>>>29;return e}(a);b=1732584193;c=4023233417;d=2562383102;e=271733878;for(a=0;a<f.length;a+=16)m=b,n=c,o=d,p=e,b=h(b,c,d,e,f[a+0],7,3614090360),e=h(e,b,c,d,f[a+1],12,3905402710),d=h(d,e,b,c,f[a+2],17,606105819),c=h(c,d,e,b,f[a+3],22,3250441966),b=h(b,c,d,e,f[a+4],7,4118548399),e=h(e,b,c,d,f[a+5],12,1200080426),d=h(d,e,b,c,f[a+6],17,2821735955), c=h(c,d,e,b,f[a+7],22,4249261313),b=h(b,c,d,e,f[a+8],7,1770035416),e=h(e,b,c,d,f[a+9],12,2336552879),d=h(d,e,b,c,f[a+10],17,4294925233),c=h(c,d,e,b,f[a+11],22,2304563134),b=h(b,c,d,e,f[a+12],7,1804603682),e=h(e,b,c,d,f[a+13],12,4254626195),d=h(d,e,b,c,f[a+14],17,2792965006),c=h(c,d,e,b,f[a+15],22,1236535329),b=i(b,c,d,e,f[a+1],5,4129170786),e=i(e,b,c,d,f[a+6],9,3225465664),d=i(d,e,b,c,f[a+11],14,643717713),c=i(c,d,e,b,f[a+0],20,3921069994),b=i(b,c,d,e,f[a+5],5,3593408605),e=i(e,b,c,d,f[a+10],9,38016083), d=i(d,e,b,c,f[a+15],14,3634488961),c=i(c,d,e,b,f[a+4],20,3889429448),b=i(b,c,d,e,f[a+9],5,568446438),e=i(e,b,c,d,f[a+14],9,3275163606),d=i(d,e,b,c,f[a+3],14,4107603335),c=i(c,d,e,b,f[a+8],20,1163531501),b=i(b,c,d,e,f[a+13],5,2850285829),e=i(e,b,c,d,f[a+2],9,4243563512),d=i(d,e,b,c,f[a+7],14,1735328473),c=i(c,d,e,b,f[a+12],20,2368359562),b=j(b,c,d,e,f[a+5],4,4294588738),e=j(e,b,c,d,f[a+8],11,2272392833),d=j(d,e,b,c,f[a+11],16,1839030562),c=j(c,d,e,b,f[a+14],23,4259657740),b=j(b,c,d,e,f[a+1],4,2763975236), e=j(e,b,c,d,f[a+4],11,1272893353),d=j(d,e,b,c,f[a+7],16,4139469664),c=j(c,d,e,b,f[a+10],23,3200236656),b=j(b,c,d,e,f[a+13],4,681279174),e=j(e,b,c,d,f[a+0],11,3936430074),d=j(d,e,b,c,f[a+3],16,3572445317),c=j(c,d,e,b,f[a+6],23,76029189),b=j(b,c,d,e,f[a+9],4,3654602809),e=j(e,b,c,d,f[a+12],11,3873151461),d=j(d,e,b,c,f[a+15],16,530742520),c=j(c,d,e,b,f[a+2],23,3299628645),b=k(b,c,d,e,f[a+0],6,4096336452),e=k(e,b,c,d,f[a+7],10,1126891415),d=k(d,e,b,c,f[a+14],15,2878612391),c=k(c,d,e,b,f[a+5],21,4237533241), b=k(b,c,d,e,f[a+12],6,1700485571),e=k(e,b,c,d,f[a+3],10,2399980690),d=k(d,e,b,c,f[a+10],15,4293915773),c=k(c,d,e,b,f[a+1],21,2240044497),b=k(b,c,d,e,f[a+8],6,1873313359),e=k(e,b,c,d,f[a+15],10,4264355552),d=k(d,e,b,c,f[a+6],15,2734768916),c=k(c,d,e,b,f[a+13],21,1309151649),b=k(b,c,d,e,f[a+4],6,4149444226),e=k(e,b,c,d,f[a+11],10,3174756917),d=k(d,e,b,c,f[a+2],15,718787259),c=k(c,d,e,b,f[a+9],21,3951481745),b=g(b,m),c=g(c,n),d=g(d,o),e=g(e,p);return(l(b)+l(c)+l(d)+l(e)).toLowerCase()};

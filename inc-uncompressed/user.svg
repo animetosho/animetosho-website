@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://web.resource.org/cc/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" id="svg898" height="15" width="16" version="1.0" y="0" x="0" viewBox="0 0 221.2 206">
+  <defs id="defs900">
+    <linearGradient id="linearGradient906" y1=".98592" x2=".49286" x1=".49286" y2="7.0833e-16">
+      <stop id="stop870" stop-color="#5ea730" offset="0"/>
+      <stop id="stop871" stop-color="#8eef2c" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient908" y1=".98592" x2=".46032" x1=".46032" y2=".0070423">
+      <stop id="stop876" stop-color="#e28700" offset="0"/>
+      <stop id="stop877" stop-color="#ffdbaf" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient914" y1="1.007" x2=".48824" x1=".48824" y2="-.0070423">
+      <stop id="stop941" stop-color="#fff" stop-opacity="0" offset="0"/>
+      <stop id="stop943" stop-color="#fff" stop-opacity=".49194" offset="1"/>
+    </linearGradient>
+    <linearGradient id="linearGradient929" y1=".0070421" x2=".49225" x1=".49225" y2=".99296">
+      <stop id="stop884" stop-color="#fff" stop-opacity="0" offset="0"/>
+      <stop id="stop886" stop-color="#fff" stop-opacity=".015686" offset=".25316"/>
+      <stop id="stop885" stop-color="#fff" stop-opacity=".7" offset="1"/>
+    </linearGradient>
+  </defs>
+  <g id="g890" fill-rule="evenodd" transform="translate(-2.8231 -14.603)">
+    <path id="path868" stroke-linejoin="round" d="m208.16 205.35c3.23-55.79-40.6-97.79-96.39-101.02-55.779-3.22-103.67 39.44-106.89 95.22-0.2518 4.3-0.2416 2.07 0.0313 6.37l101.02-0.53 102.23-0.04z" stroke="#008c00" stroke-linecap="round" stroke-width="3.75" fill="url(#linearGradient906)"/>
+    <path id="path881" d="m169.79 157.87a61.941 48.405 0 1 1 -123.89 0" stroke-width="1pt" fill="url(#linearGradient929)" transform="matrix(1.4 0 0 -2.0416 -43.96 526.47)"/>
+    <path id="path859" stroke-linejoin="round" d="m166.55 80.037a54.437 62.382 0 1 0 -108.88 0 54.437 62.382 0 1 0 108.88 0z" transform="translate(-7.6506 -1.177)" stroke="#854b12" stroke-linecap="round" stroke-width="3.75" fill="url(#linearGradient908)"/>
+    <path id="path879" d="m53.849 57.674c0-2.648-4.414 10.593 15.007 11.77 19.42 1.177 38.544-29.72 53.844-25.012 15.31 4.709 22.37 24.129 31.2 11.771 4.41-10.005-26.19-34.428-26.19-34.428s-14.13-5.885-22.96-5.885c-8.823 0-25.301 6.473-29.421 9.416-4.119 2.942-13.535 14.713-13.535 14.713l-7.945 17.655z" fill="#854b12"/>
+    <path id="path880" d="m56.344 56.829c-0.742 4.369 4.515 7.331 7.989 8.54 6.179 1.766 11.849 3.69 37.667-17.655 22.85-22.272 8.2-31.018-9.238-28.434-14.125 2.354-32.351 18.775-36.418 37.549z" fill="url(#linearGradient914)"/>
+  </g>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>man chris kempson 01</dc:title>
+        <dc:date>2011-02-16T18:05:32</dc:date>
+        <dc:description>originally uploaded by Chris Kempson for OCAL 0.18</dc:description>
+        <dc:source>http://openclipart.org/detail/119149/man-chris-kempson-01-by-anonymous</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Anonymous</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>clip art</rdf:li>
+            <rdf:li>clipart</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>man</rdf:li>
+            <rdf:li>people</rdf:li>
+            <rdf:li>user</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>
