@@ -1,13 +1,13 @@
 ALTER TABLE nyaasi_torrents
-  DROP INDEX sub_category_index,
-  DROP INDEX listing_check_index,
-  DROP INDEX uploader_check_index,
-  DROP COLUMN idx_class;
+  DROP INDEX IF EXISTS sub_category_index,
+  DROP INDEX IF EXISTS listing_check_index,
+  DROP INDEX IF EXISTS uploader_check_index,
+  DROP COLUMN IF EXISTS idx_class;
 ALTER TABLE nyaasis_torrents
-  DROP INDEX sub_category_index,
-  DROP INDEX listing_check_index,
-  DROP INDEX uploader_check_index,
-  DROP COLUMN idx_class;
+  DROP INDEX IF EXISTS sub_category_index,
+  DROP INDEX IF EXISTS listing_check_index,
+  DROP INDEX IF EXISTS uploader_check_index,
+  DROP COLUMN IF EXISTS idx_class;
 
 
 ALTER TABLE `tosho_torrents` ENGINE = BLACKHOLE;

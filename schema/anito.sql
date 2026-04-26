@@ -1,4 +1,4 @@
-CREATE TABLE `toto_toto_meta` (
+CREATE TABLE IF NOT EXISTS `toto_toto_meta` (
   `id` INT(10) UNSIGNED NOT NULL,
   `comments` int(11) unsigned not null default 0,
   `comments_top` int(11) unsigned not null default 0,
@@ -6,7 +6,7 @@ CREATE TABLE `toto_toto_meta` (
   PRIMARY KEY(`id`)
 ) ENGINE=Aria;
 
-CREATE TABLE `toto_users` (
+CREATE TABLE IF NOT EXISTS `toto_users` (
   `uid` INT(10) UNSIGNED NOT NULL auto_increment,
   `username` VARCHAR(40) NOT NULL,
   `pwd` BINARY(40) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE `toto_users` (
   KEY (`email`)
 ) ENGINE=Aria;
 
-CREATE TABLE `toto_users_verify_email` (
+CREATE TABLE IF NOT EXISTS `toto_users_verify_email` (
   `uid` INT(10) UNSIGNED NOT NULL,
   `email` VARCHAR(220) NOT NULL,
   `hash` BINARY(16) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `toto_users_verify_email` (
   KEY (`uid`)
 ) ENGINE=Aria;
 
-CREATE TABLE `toto_users_verify_pwdreset` (
+CREATE TABLE IF NOT EXISTS `toto_users_verify_pwdreset` (
   `uid` INT(10) UNSIGNED NOT NULL,
   `hash` BINARY(16) NOT NULL,
   `dateline` BIGINT(30) NOT NULL DEFAULT 0,
@@ -50,7 +50,7 @@ CREATE TABLE `toto_users_verify_pwdreset` (
   KEY (`uid`)
 ) ENGINE=Aria;
 
-CREATE TABLE `toto_sessions` (
+CREATE TABLE IF NOT EXISTS `toto_sessions` (
   `sid` CHAR(32) NOT NULL,
   `uid` INT(10) UNSIGNED NOT NULL DEFAULT 0,
   `time` BIGINT(30) UNSIGNED NOT NULL DEFAULT 0,
@@ -61,7 +61,7 @@ CREATE TABLE `toto_sessions` (
   KEY (`time`)
 ) ENGINE=Memory;
 
-CREATE TABLE `toto_captcha` (
+CREATE TABLE IF NOT EXISTS `toto_captcha` (
   `hash` BINARY(16) NOT NULL,
   `answerkey` INT(11) NOT NULL,
   `dateline` BIGINT(30) UNSIGNED NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE `toto_captcha` (
   KEY (`dateline`)
 ) ENGINE=Memory; -- if too big, change to Aria
 
-CREATE TABLE `toto_parsecache` (
+CREATE TABLE IF NOT EXISTS `toto_parsecache` (
   `title` varchar(50) NOT NULL,
   `data` text NOT NULL,
   `dateline` bigint(30) NOT NULL DEFAULT 0,
@@ -80,7 +80,7 @@ CREATE TABLE `toto_parsecache` (
 
 
 
-CREATE TABLE `toto_comments` (
+CREATE TABLE IF NOT EXISTS `toto_comments` (
   `cid` INT(10) UNSIGNED NOT NULL auto_increment,
   `uid` INT(10) UNSIGNED NOT NULL DEFAULT 0,
   `name` VARCHAR(40) NOT NULL DEFAULT "",
@@ -107,7 +107,7 @@ CREATE TABLE `toto_comments` (
   KEY `mid_dateline` (`mid`, `dateline`)
 ) ENGINE=Aria;
 
-CREATE TABLE `toto_comment_votes` (
+CREATE TABLE IF NOT EXISTS `toto_comment_votes` (
   `cid` INT(10) UNSIGNED NOT NULL,
   `uid` INT(10) UNSIGNED NOT NULL,
   `dateline` BIGINT(30) UNSIGNED NOT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE `toto_comment_votes` (
   KEY (`idx_mid`,`uid`)
 ) ENGINE=Aria;
 
-CREATE TABLE `toto_feedback_comments` (
+CREATE TABLE IF NOT EXISTS `toto_feedback_comments` (
   `cid` INT(10) UNSIGNED NOT NULL auto_increment,
   `uid` INT(10) UNSIGNED NOT NULL DEFAULT 0,
   `name` VARCHAR(40) NOT NULL DEFAULT "",
@@ -138,7 +138,7 @@ CREATE TABLE `toto_feedback_comments` (
   KEY (`replyto`)
 ) ENGINE=Aria;
 
-CREATE TABLE `toto_modtalk_comments` (
+CREATE TABLE IF NOT EXISTS `toto_modtalk_comments` (
   `cid` INT(10) UNSIGNED NOT NULL auto_increment,
   `uid` INT(10) UNSIGNED NOT NULL DEFAULT 0,
   `name` VARCHAR(40) NOT NULL DEFAULT "",
@@ -158,7 +158,7 @@ CREATE TABLE `toto_modtalk_comments` (
   KEY (`replyto`)
 ) ENGINE=Aria;
 
-CREATE TABLE `toto_activity_log` (
+CREATE TABLE IF NOT EXISTS `toto_activity_log` (
   `action` ENUM("view","feedback","modtalk","register","contact") NOT NULL,
   `id` INT(10) UNSIGNED NOT NULL,
   `ip` VARCHAR(40) NOT NULL DEFAULT "",
@@ -170,7 +170,7 @@ CREATE TABLE `toto_activity_log` (
 
 
 --  index of all comments, to accelerate the 'View Comments' page
-CREATE TABLE `toto_comments_all` (
+CREATE TABLE IF NOT EXISTS `toto_comments_all` (
   `section` CHAR(10) NOT NULL,
   `cid` INT(10) UNSIGNED NOT NULL,
   `message_type` SMALLINT(5) NOT NULL, -- -1=feedback, -2=modtalk
@@ -181,58 +181,58 @@ CREATE TABLE `toto_comments_all` (
   KEY (`message_type`,`dateline`)
 ) ENGINE=Aria;
 
-CREATE TRIGGER trig_comments_all_comments
+CREATE TRIGGER IF NOT EXISTS trig_comments_all_comments
 AFTER INSERT ON toto_comments
 FOR EACH ROW
 INSERT INTO toto_comments_all SET section="", cid=NEW.cid, message_type=NEW.message_type, dateline=NEW.dateline, top_dateline=IF(NEW.replyto=0, NEW.dateline, (SELECT dateline FROM toto_comments WHERE NEW.replytotop=cid));
 
 -- this isn't exactly correct, but works for now
-CREATE TRIGGER trig_comments_all_comments_upd
+CREATE TRIGGER IF NOT EXISTS trig_comments_all_comments_upd
 AFTER UPDATE ON toto_comments
 FOR EACH ROW
 UPDATE toto_comments_all SET message_type=NEW.message_type WHERE cid=NEW.cid AND section="";
 
-CREATE TRIGGER trig_comments_all_comments_del
+CREATE TRIGGER IF NOT EXISTS trig_comments_all_comments_del
 BEFORE DELETE ON toto_comments
 FOR EACH ROW
 DELETE FROM toto_comments_all WHERE section="" AND cid=OLD.cid;
 
-CREATE TRIGGER trig_comments_all_feedback
+CREATE TRIGGER IF NOT EXISTS trig_comments_all_feedback
 AFTER INSERT ON toto_feedback_comments
 FOR EACH ROW
 INSERT INTO toto_comments_all SET section="feedback", cid=NEW.cid, message_type=-1, dateline=NEW.dateline, top_dateline=IF(NEW.replyto=0, NEW.dateline, (SELECT dateline FROM toto_feedback_comments WHERE NEW.replytotop=cid));
 
-CREATE TRIGGER trig_comments_all_feedback_del
+CREATE TRIGGER IF NOT EXISTS trig_comments_all_feedback_del
 BEFORE DELETE ON toto_feedback_comments
 FOR EACH ROW
 DELETE FROM toto_comments_all WHERE section="feedback" AND cid=OLD.cid;
 
-CREATE TRIGGER trig_comments_all_modtalk
+CREATE TRIGGER IF NOT EXISTS trig_comments_all_modtalk
 AFTER INSERT ON toto_modtalk_comments
 FOR EACH ROW
 INSERT INTO toto_comments_all SET section="modtalk", cid=NEW.cid, message_type=-2, dateline=NEW.dateline, top_dateline=IF(NEW.replyto=0, NEW.dateline, (SELECT dateline FROM toto_modtalk_comments WHERE NEW.replytotop=cid));
 
-CREATE TRIGGER trig_comments_all_modtalk_del
+CREATE TRIGGER IF NOT EXISTS trig_comments_all_modtalk_del
 BEFORE DELETE ON toto_modtalk_comments
 FOR EACH ROW
 DELETE FROM toto_comments_all WHERE section="modtalk" AND cid=OLD.cid;
 
 -- episodes/anime index
-CREATE TABLE `toto_ep_latest` (
+CREATE TABLE IF NOT EXISTS `toto_ep_latest` (
   `eid` int(11) unsigned not null,
   `dateline` bigint(30) NULL,
   primary key (`eid`),
   key (`dateline`)
 ) ENGINE=Aria;
 
-CREATE TABLE `toto_anime_latest` (
+CREATE TABLE IF NOT EXISTS `toto_anime_latest` (
   `aid` int(11) unsigned not null,
   `dateline` bigint(30) NULL,
   primary key (`aid`),
   key (`dateline`)
 ) ENGINE=Aria;
 
-CREATE TABLE `toto_aniep_latest` (
+CREATE TABLE IF NOT EXISTS `toto_aniep_latest` (
   `aeid` int(11) not null, -- negative = aid, positive = eid
   `aid` int(11) unsigned not null,
   `eid` int(11) unsigned not null,

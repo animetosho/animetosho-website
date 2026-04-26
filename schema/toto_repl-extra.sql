@@ -3,7 +3,7 @@
 
 DELIMITER ||
 
-CREATE TRIGGER trig_ep_insert
+CREATE TRIGGER IF NOT EXISTS trig_ep_insert
 AFTER INSERT ON toto_toto
 FOR EACH ROW BEGIN
   DECLARE aniep_dateline BIGINT;
@@ -26,7 +26,7 @@ FOR EACH ROW BEGIN
   REPLACE INTO anito.toto_anime_latest VALUES(NEW.aid, -(SELECT MIN(idx_dateline) FROM toto_toto WHERE aid=NEW.aid));
 END ||
 
-CREATE TRIGGER trig_ep_update
+CREATE TRIGGER IF NOT EXISTS trig_ep_update
 AFTER UPDATE ON toto_toto
 FOR EACH ROW BEGIN
   DECLARE aniep_dateline BIGINT;
@@ -73,7 +73,7 @@ FOR EACH ROW BEGIN
   END IF;
 END ||
 
-CREATE TRIGGER trig_ep_delete
+CREATE TRIGGER IF NOT EXISTS trig_ep_delete
 AFTER DELETE ON toto_toto
 FOR EACH ROW BEGIN
   DECLARE aniep_dateline BIGINT;
@@ -109,6 +109,6 @@ DELIMITER ;
 
 -- for Sphinx to work, track toto_toto updates
 ALTER TABLE `toto_toto`
-ADD COLUMN `_updated`  timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
-ADD INDEX `sphinx_delta` (`_updated`);
+ADD COLUMN IF NOT EXISTS `_updated`  timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+ADD INDEX IF NOT EXISTS `sphinx_delta` (`_updated`);
 
