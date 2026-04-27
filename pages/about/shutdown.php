@@ -10,6 +10,8 @@ $AT->output->printTitleAndDesc('Anime Tosho Shutdown');
 
 <p>This is advance notice that Anime Tosho will start shutting down <i>permanently</i>, beginning in May 2026.</p>
 
+<p><b>2026-04-27: <a href="<?=AT::buildUrl('about', 'shutdown2')?>">shutdown update</a></b></p>
+
 <h3>Summary</h3>
 <ul>
 <li>The updates server will be terminated in May 2026. Once this happens, no new torrents will be added or processed.</li>

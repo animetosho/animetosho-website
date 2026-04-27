@@ -16,6 +16,8 @@ class AT_Output
 		$this->config['cookiename'] = $cookiename;
 		$this->config['cookiedomain'] = $cookiedomain;
 		$this->config['cookiepath'] = $cookiepath;
+		
+		$this->notices[] = ['Anime Tosho will <a href="'.AT::buildUrl('about', 'shutdown2').'">begin shutting down permanently on 2026-05-09</a>', 'alert'];
 	}
 	
 	public function setCookie($name, $value='', $expire=0) {

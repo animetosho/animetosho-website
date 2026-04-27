@@ -29,6 +29,7 @@ if(!$AT->input->got('page') && !$AT->db::readonly) {
 <strong>Latest Updates</strong> [<a href="<?=AT::buildUrl('about', 'news')?>">archive</a>]
 <?php
 foreach(array(
+	'27th Apr 2026' => 'New torrents will <a href="'.AT::buildUrl('about', 'shutdown2').'">stop being added on 2026-05-09</a>',
 	'8th Feb 2026' => '<s>The storage/feed/API server is quickly approaching its bandwidth quota (which resets in a week). I may disable some features (screenshots/attachments) and run the feed/API in a degraded state (some requests will fail) to conserve bandwidth until the quota resets.</s> Quota reset, regular operation restored.',
 	'5th Feb 2026' => 'Anime Tosho will begin <a href="'.AT::buildUrl('about', 'shutdown').'">shutting down permanently in May 2026</a>.',
 ) as $date => $msg) {
