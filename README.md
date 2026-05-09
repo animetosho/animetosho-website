@@ -114,3 +114,7 @@ In *pages/includes*, the following files are used for handling file info, and ar
 * finfo-compress.php
 * zstd-dict/\*
 
+# License
+
+This code (excluding *includes/3rdparty/*) is Public Domain or [CC0](https://creativecommons.org/publicdomain/zero/1.0/legalcode) (or equivalent) if PD isn’t recognised.
+
