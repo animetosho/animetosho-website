@@ -16,6 +16,9 @@ $AT->output->printTitleAndDesc('News Archive');
 <?php
 
 foreach(array(
+	'27th Apr 2026' => 'New torrents will <a href="'.AT::buildUrl('about', 'shutdown2').'">stop being added on 2026-05-09</a>',
+	'8th Feb 2026' => '<s>The storage/feed/API server is quickly approaching its bandwidth quota (which resets in a week). I may disable some features (screenshots/attachments) and run the feed/API in a degraded state (some requests will fail) to conserve bandwidth until the quota resets.</s> Quota reset, regular operation restored.',
+	'5th Feb 2026' => 'Anime Tosho will begin <a href="'.AT::buildUrl('about', 'shutdown').'">shutting down permanently in May 2026</a>.',
 	'27th Nov 2024' => 'Anidex as a source will be removed in about two weeks\' time. Nyaa and TokyoTosho will remain as sources.',
 	'24th Sep 2024' => 'The secondary webserver should now be fully restored. Apologies for the extended downtime and thank you for your patience.',
 	'23rd Sep 2024' => 'The secondary webserver is still currently down (links to torrents, attachments, NZBs, images and the feed/RSS will not work). I am currently trying to get a replacement server, but the host is taking their time on the matter unfortunately. Apologies for the extended downtime.',

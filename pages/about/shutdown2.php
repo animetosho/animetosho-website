@@ -16,7 +16,7 @@ $AT->output->printTitleAndDesc('Anime Tosho Shutdown Update');
 <li>Existing torrents will be given several hours (up to around 24h) to complete processing - incomplete torrents will be marked as broken</li>
 <li>Around the 10th of May (after all processing of existing torrents is done), further updates will cease and a database export of the updates server (MariaDB SQL script) will be created, as well as a torrent containing all screenshots, attachments, NZBs and torrent files. These will be made available with an announcement.
 	<ul>
-	<li>The updates server will seed this torrent until the host terminates the lease, which is expected to be around 2026-05-18</li>
+	<li>The updates server will seed this torrent until the host terminates the lease, which is expected to be around 2026-05-16</li>
 	<li>The torrent will be a copy of the data as it is stored on the server, that is, all files are numbered and unidentifiable without looking up the accompanying database dump. All screenshots are in MKV format with accompanying WebP subtitles, attachments are all compressed .xz files, and NZBs are gzip'd.</li>
 	<li>Data mirrored from AniDB will not be provided</li>
 	</ul>
@@ -37,12 +37,27 @@ $AT->output->printTitleAndDesc('Anime Tosho Shutdown Update');
 <h3>Alternatives/Resources</h3>
 <p>Possible alternatives to some aspects of AT, as well as helpful resources, have been posted in the <a href="<?=AT::buildUrl('feedback')?>">feedback section</a>. I haven't investigated any of these much, I just list them in case you find any useful:</p>
 <ul>
-<li><a href="https://scenenzbs.com/">SceneNZBs</a> (<a href="https://animetosho.org/feedback?page=483#comment22132">comment</a>) - they've reached out to let me know they'll ingest AT's NZB dump, and have already set up Nyaa/TokyoTosho/nekoBT torrent to Usenet mirroring</li>
-<li><a href="https://amenzb.moe/">ameNZB</a> (<a href="https://animetosho.org/feedback?page=483#comment22136">comment</a>) - community-driven torrent to Usenet mirroring index</li>
+<li>Usenet mirroring:
+<ul>
+	<li><a href="https://scenenzbs.com/">SceneNZBs</a> (<a href="https://animetosho.org/feedback?page=483#comment22132">comment</a>) - they've reached out to let me know they'll ingest AT's NZB dump, and have already set up Nyaa/TokyoTosho/nekoBT torrent to Usenet mirroring</li>
+	<li><a href="https://amenzb.moe/">ameNZB</a> (<a href="https://animetosho.org/feedback?page=483#comment22136">comment</a>) - community-driven torrent to Usenet mirroring index</li>
+	<li><a href="https://digitalcarnage.info/">Digital Carnage</a> (<a href="https://animetosho.org/feedback?page=483#comment22383">comment</a>)</li>
+	<li><a href="https://aninzb.moe/">aninzb</a> (<a href="https://animetosho.org/feedback?page=502#comment22561">comment</a>) - also provides subtitle extractions, screenshots and ffprobe output</li>
+</ul></li>
+<li><a href="https://animetosho.xyz/">Anime Tosho NEW</a> (<a href="https://animetosho.org/feedback?page=504#comment22668">comment</a>) - AT lookalike, may adopt AT features in the future</li>
 <li><a href="https://tokyoinsider.com/">Tokyo Insider</a> (<a href="https://animetosho.org/feedback?page=484#comment22192">comment</a>) - provides anime DDLs (site down at time of writing)</li>
-<li><a href="https://animetoki.com/">Anime Toki</a> (<a href="https://animetosho.org/feedback?page=484#comment22223">comment</a>) - anime DDL site, doesn't appear to be a mirror like AT</li>
+<li>Anime DDL sites (not mirrors like AT):
+<ul>
+	<li><a href="https://animetoki.com/">Anime Toki</a> (<a href="https://animetosho.org/feedback?page=484#comment22223">comment</a>)</li>
+	<li><a href="https://new.anidl.org/on-going">AniDL</a> (<a href="https://animetosho.org/feedback?page=491#comment22439">comment</a>)</li>
+	<li><a href="https://www.anime-loads.org/">Anime-Loads</a> (<a href="https://animetosho.org/feedback?page=502#comment22553">comment</a>)</li>
+	<li><a href="https://kayoanime.com/">Kayo Anime</a> (<a href="https://animetosho.org/feedback?page=503#comment22659">comment</a>)</li>
+	<li><a href="https://animepahe.pw/">anime pahe</a> (<a href="https://animetosho.org/feedback?page=506#comment22778">comment</a>)</li>
+	<li><a href="https://hi10anime.com/">Hi10 Anime</a> (<a href="https://animetosho.org/feedback?page=506#comment22779">comment</a>)</li>
+</ul></li>
 <li><a href="https://kitsunekko.net/">kitsuneko.net</a> - anime English/Japanese subtitle repository</li>
 <li><a href="https://everythingmoe.com/">EverythingMoe</a> (<a href="https://animetosho.org/feedback?page=480#comment22033">comment</a>) - anime website index</li>
+<li>Torrent-to-DDL services (<a href="https://animetosho.org/feedback?page=492#comment22343">comment</a>, <a href="https://animetosho.org/feedback?page=502#comment22533">comment2</a>)</li>
 </ul>
 <p>If you know of any other alternatives or relevant resources, I'm happy to spotlight them</p>
 

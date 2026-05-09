@@ -24,84 +24,26 @@ if(!$AT->input->got('page') && $AT->db::readonly) {
 if(!$AT->input->got('page') && !$AT->db::readonly) {
 
 ?>
-<table class="home_updates"><tr>
-<td style="width: 60%;"><div class="box">
-<strong>Latest Updates</strong> [<a href="<?=AT::buildUrl('about', 'news')?>">archive</a>]
-<?php
-foreach(array(
-	'27th Apr 2026' => 'New torrents will <a href="'.AT::buildUrl('about', 'shutdown2').'">stop being added on 2026-05-09</a>',
-	'8th Feb 2026' => '<s>The storage/feed/API server is quickly approaching its bandwidth quota (which resets in a week). I may disable some features (screenshots/attachments) and run the feed/API in a degraded state (some requests will fail) to conserve bandwidth until the quota resets.</s> Quota reset, regular operation restored.',
-	'5th Feb 2026' => 'Anime Tosho will begin <a href="'.AT::buildUrl('about', 'shutdown').'">shutting down permanently in May 2026</a>.',
-) as $date => $msg) {
-	echo '<div', (TIME_NOW - strtotime($date) < 86400*3 ? ' style="font-size: 1.2em;"':''), '><strong>', $date, '</strong>: ', $msg, '</div>';
-}
-?>
-</div></td>
-<?php
+<div class="usernotice usernotice_alert">
+<strong>Updates Frozen</strong>
+<div><p>As per <a href="<?=AT::buildUrl('about','shutdown2')?>">previous notice</a>, all updates to Anime Tosho have now been permanently stopped. In other words, no new content will be added, and no data updates will be made.</p>
 
-// latest comments
-$parser_load = $comments = $comments_top = array();
+<p>Whilst this website will likely stay around &quot;frozen&quot; for a few months (at least until October), this marks the beginning of the end of the Anime Tosho project, and I expect that this is where most of you part ways.</p>
 
-$comments_perpage = 10;
-$AT->db->suppressNotices(true);
-$AT->db->select('comments', '', 'comments.cid,comments.name AS comment_name,comments.mid,comments.dateline,comments.message,comments.replyto,comments.replytotop,toto.name,toto.tosho_id,toto.nyaa_id,toto.nyaa_subdom,toto.anidex_id,toto.nekobt_id,toto_meta.comments_top,toto.id AS toto_id', array('order' => 'dateline DESC', 'limit' => 5, 'joins' => array(
-	array('inner', 'toto', 'mid', 'id'),
-	array('left', 'toto_meta', 'mid', 'id')
-)));
-$AT->db->suppressNotices(false);
-while($comment = $AT->db->fetchArray()) {
-	$parser_load[] = 'toto_comment_'.$comment['cid'];
-	$comments[] = $comment;
-	if($comment['comments_top'] > $comments_perpage && $comment['replyto']) {
-		// this comment may be paged, and isn't a topmost parent = we need to fetch the dateline of the parent
-		$comments_top[$comment['replytotop']] = $comment['cid'];
-	}
-} unset($comment);
-if(!empty($comments)) {
-	// grab any top level comments for paging calculations
-	$comments_top_datelines = array();
-	if(!empty($comments_top)) {
-		$AT->db->select('comments', 'cid IN ('.implode(',', array_keys($comments_top)).')', 'cid,dateline');
-		while($comment = $AT->db->fetchArray()) {
-			$comments_top_datelines[$comments_top[$comment['cid']]] = $comment['dateline'];
-		} unset($comment);
-	}
-	// output comments
-	echo '<td style="width: 40%;"><div class="box"><strong>Latest Comments</strong> [<a href="'.AT::buildUrl('comments').'">view all</a>]';
-	if(!isset($parser)) {
-		require_once AT_ROOT.'includes/parser.php';
-		$parser = new AT_Parser($AT->db, $AT->cache);
-	}
-	$parser->load($parser_load);
-	unset($parser_load);
-	
-	foreach($comments as &$comment) {
-		$cmt_urlargs = array();
-		
-		if($comment['comments_top'] > $comments_perpage) {
-			$comment_dateline = $comment['dateline'];
-			if($comment['replyto'] && isset($comments_top_datelines[$comment['cid']]))
-				$comment_dateline = $comments_top_datelines[$comment['cid']];
-			// check which page this comment is on
-			// TODO: maybe consider the possibility of caching this, although it's probably not that important
-			$comment_pos = $AT->db->selectGetField('comments', 'COUNT(*)', '`mid`='.$comment['mid'].' AND `replydepth`=0 AND `dateline`<'.$comment_dateline); // 0 based number
-			$comment_page = floor($comment_pos / $comments_perpage) + 1;
-			$cmt_urlargs = array('page' => $comment_page);
-		} // otherwise, page 1 is implied
-		
-		$url = Toto::viewUrl($comment, $cmt_urlargs);
-		$msg = unhtmlentities(preg_replace('~\s+~', ' ', strip_tags($parser->parse('toto_comment_'.$comment['cid'], $comment['message']))));
-		if(isset($msg[40])) $msg = mb_substr($msg, 0, 40) . '...';
-		$title = $comment['name'];
-		if(isset($title[25]))
-			$title = '<span title="'.htmlspecialchars($title).'">' . htmlspecialchars(mb_substr($title, 0, 25)) . '...</span>';
-		else
-			$title = htmlspecialchars($title);
-		echo '<div><a href="',$url,'#comment',$comment['cid'],'" title="',htmlspecialchars($msg),'">', $AT->user->fmtDate($comment['dateline']), ': posted by ', htmlspecialchars($comment['comment_name']), ' in ', $title, '</a></div>';
-	} unset($comment);
-	echo '</div></td>';
-}
-?></tr></table><?php
+<p>I'd like to take the opportunity to shout out the incredible contributions many people in this general community have made, which has been a key source of my motivation here. A big thanks to uploaders, upstream websites, helpful commenters, developers of tools I've used and countless others who help make this community work and keep it running - Anime Tosho is built upon the work of many, and it wouldn't be possible without so many of you.</p>
+
+<p>A few projects have started very recently looking to continue aspects of Anime Tosho: <a href="https://amenzb.moe/">ameNZB</a>, <a href="https://aninzb.moe/">aninzb</a> and <a href="https://animetosho.xyz/">Anime Tosho NEW</a> (if there's any more, <a href="<?=AT::buildUrl('feedback')?>">let us know!</a>). As these are relatively new, they may be rough around the edges for now, but might serve what you're looking for and hopefully eventually surpass Anime Tosho. Send your encouragement to the developers! I hope that they stand the test of time and achieve the goals the owners seek to accomplish.
+<br/>You can also find a list of user suggested alternatives in the <a href="<?=AT::buildUrl('about','shutdown2')?>">previous notice</a>.</p>
+
+<p>Regardless of however you continue your journey, I wish you all the best.</p>
+
+<p>An AT data dump will be made available soon.</p>
+</div>
+</div>
+<div style="text-align: center; margin-top: -0.5em; margin-bottom: 2em; font-size: smaller">[<a href="<?=AT::buildUrl('about', 'news')?>">news archive</a>] 
+[<a href="<?=AT::buildUrl('comments')?>">latest comments</a>]
+</div>
+<?php
 
 } // if(!$AT->input->got('page') && !$AT->db::readonly)
 

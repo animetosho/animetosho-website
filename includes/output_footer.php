@@ -6,7 +6,7 @@
 		<div id="topbar_c2"><div id="topbar">
 			<a id="anchor_top"></a>
 			<div id="topbar_title"><?php echo '<a href="', AT::buildUrl('home'), '">', SITE_NAME, '</a>'; ?></div>
-			<div id="topbar_betanote" title="Expect shit to happen; PS: we're not Google">beta</div>
+			<div id="topbar_betanote" title="Archive of Anime Tosho">archive</div>
 			<div id="topbar_tagline">Anime DDL+NZB mirror</div>
 			<div id="topbar_search">
 				<form action="<?php echo AT::buildUrl('search'); ?>" method="get">
