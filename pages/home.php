@@ -25,8 +25,8 @@ if(!$AT->input->got('page') && !$AT->db::readonly) {
 
 ?>
 <div class="usernotice usernotice_alert">
-<strong>Updates Frozen</strong>
-<div><p>As per <a href="<?=AT::buildUrl('about','shutdown2')?>">previous notice</a>, all updates to Anime Tosho have now been permanently stopped. In other words, no new content will be added, and no data updates will be made.</p>
+<strong>Updates Frozen</strong> [2026-05-09]
+<p>As per <a href="<?=AT::buildUrl('about','shutdown2')?>">previous notice</a>, all updates to Anime Tosho have now been permanently stopped. In other words, no new content will be added, and no data updates will be made.</p>
 
 <p>Whilst this website will likely stay around &quot;frozen&quot; for a few months (at least until October), this marks the beginning of the end of the Anime Tosho project, and I expect that this is where most of you part ways.</p>
 
@@ -36,9 +36,9 @@ if(!$AT->input->got('page') && !$AT->db::readonly) {
 <br/>You can also find a list of user suggested alternatives in the <a href="<?=AT::buildUrl('about','shutdown2')?>">previous notice</a>.</p>
 
 <p>Regardless of however you continue your journey, I wish you all the best.</p>
-
-<p>An AT data dump will be made available soon.</p>
 </div>
+<div class="usernotice usernotice_success">
+Anime Tosho <a href="<?=AT::buildUrl('about','data')?>">data dump is now available</a>. If you want it, get it quick as it may not last long!
 </div>
 <div style="text-align: center; margin-top: -0.5em; margin-bottom: 2em; font-size: smaller">[<a href="<?=AT::buildUrl('about', 'news')?>">news archive</a>] 
 [<a href="<?=AT::buildUrl('comments')?>">latest comments</a>]

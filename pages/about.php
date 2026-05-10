@@ -10,6 +10,7 @@ switch($sa = $AT->input->subaction) {
 	case 'logistics':
 	case 'shutdown':
 	case 'shutdown2':
+	case 'data':
 		break;
 	default:
 		$sa = 'index';
